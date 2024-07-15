@@ -35,6 +35,11 @@ print(iris_df.describe())
 ```
 {: .language-python}
 
+```
+print(iris_df.columns)
+```
+{: .language-python}
+
 Understanding the contents and data types of a data set is important for accurate analysis.
 
 ### Manipulating DataFrames
@@ -116,5 +121,53 @@ def square_value(x):
 iris_df['petal.length.squared'] = iris_df['petal.length'].apply(square_value)
 ```
 {: .language-python}
+
+### Useful organisational tools
+
+* Display column names:
+```
+print(iris_df.columns)
+```
+{: .language-python}
+
+
+* Renaming columns:
+```
+iris_df.rename(columns={'sepal.length': 'sepal_length'}
+```
+{: .language-python}
+
+
+* Setting index: 
+```
+iris_df.set_index('sepal_length')
+```
+{: .language-python}
+
+### Transformations
+
+* Sorting:
+
+```
+iris_df.sort_values(by='sepal_length')
+```
+{: .language-python}
+
+* Grouping:
+
+```
+iris_df.groupby('variety')
+```
+{: .language-python}
+
+### Exporting data
+
+Manipulations, transformations, etc. can take time on big datasets. You won't want to repeat this everytime you want to work on your data. So good practice is to save the output as a new file. 
+
+```
+iris_df.to_csv("proc_data\sensible_name.csv")
+```
+{: .language-python}
+
 
 Pandas is highly efficient for DataFrame manipulation due to its intuitive syntax and powerful functionalities. It offers a wide range of built-in functions for data selection, filtering, and transformation, making tasks like data cleaning and preprocessing streamlined. 

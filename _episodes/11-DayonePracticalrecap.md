@@ -1,6 +1,6 @@
 ---
 title: "Practical session"
-teaching: 10
+teaching: 0
 exercises: 45
 questions:
 - "Can you now get your own data into Python?"
