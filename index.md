@@ -3,19 +3,21 @@ layout: lesson
 root: .
 ---
 
-This is a condensed introduction to Python and Spyder. We have aimed to provide you with the basic information you need to tackle statistics and machine learning. It is a big task to learn a programming language especially if you have no experience. You will not be fluent in Python by the end of this session, but hopefully you will be off to a good start.
+This contains all the day two content for the AI Summer School. We will complete our introduction to Python via the IDE Spyder. Day 2 focuses on cleaning and manipulating data. It is expected that your dataset may start to take you in a specific direction.
 
-By the end of this workshop, students will know how to:
+**By the end of day two, we hope you will be confident to:**
 
-* Navigate Spyder, install packages, and manage projects.
-* Handle variables and data structures (arrays, lists, and data frames).
-* Impliment flow control.
-* Create functions.
-* Plot graphics.
+* Use Pandas to manipulate dataframes
+* Visualise your data.
+* Understand how to deal with noisey/dirty data
+
+**By the end of day two, we hope you will have discovered:**
+* The question you want to try and answer
+* Data structures, packages, and data types that are relevent to your datasset/problem.
+
+
+FAQ sessions: demonstrators/attendees email jas140@aber.ac.uk with any good, common, or difficult questions and we will collate and answer periodically.
 
 > ## Prerequisites
->
-> * Participants need to have complete pre-worksheet to ensure all the software and packages needed for this course are installed.
-> * Participants understanding file management on their operating system.
+> * Summer school Day 1 content
 {: .prereq}
-
