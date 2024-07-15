@@ -1,7 +1,7 @@
 ---
 title: "Plotting in Python with Matplotlib"
-teaching: 10
-exercises: 5
+teaching: 15
+exercises: 15
 questions:
 - "How do I create plots?"
 - "How do I use data sets to populate my plot?"
@@ -22,8 +22,18 @@ import matplotlib.pyplot as plt
 ```
 {: .language-python}
 
+
 ```
-plt.figure(figsize=(8, 6))
+#simple plot
+plt.figure()
+plt.plot(x,y)
+plt.show()
+```
+{: .language-python}
+
+```
+#less simple plot
+plt.figure()
 plt.scatter(iris_df['sepal.length'], iris_df['sepal.width'])
 plt.xlabel('Sepal Length (cm)')
 plt.ylabel('Sepal Width (cm)')
@@ -32,16 +42,79 @@ plt.show()
 ```
 {: .language-python}
 
-To give you more freedom you can plot into a seperate window.
+## Plot Types
 
-1. Go to the "Tools" menu and select "Preferences" (on Windows/Linux) or "Spyder" menu and select "Preferences" (on macOS).
-2. In the Preferences dialog, navigate to the "IPython console" section.
-3. Click on the "Graphics" tab.
-4. Make sure that the "Inline backend" option is unchecked.
+* Line Plot: 
+```
+plt.plot(x, y)
+```
+{: .language-python}
+* Scatter Plot: plt.scatter(x, y)
+```
+plt.scatter(x, y)
+```
+{: .language-python}
+* Bar Plot: 
+```
+plt.bar(categories, values)
+```
+{: .language-python}
+* Histogram: 
+```
+plt.hist(data, bins)
+```
+{: .language-python}
+* Box Plot: 
+```
+plt.boxplot(data)
+```
+{: .language-python}
+* Pie Chart: 
+```
+plt.pie(sizes, labels=labels)
+```
+{: .language-python}
+* Heatmap: 
+```
+plt.imshow(data, cmap='hot', interpolation='nearest')
+```
+{: .language-python}
 
-### More plotting
+### More options
 
-There are many different type of plots, if you need a specific kind of plot a good place to start is the super helpful cheat sheet on Matplotlib. To explore all the different options you can to these cheat sheets:
+Add legend: 
+```
+plt.legend()
+```
+{: .language-python}
+Specify legend labels: 
+```
+plt.legend(['label1', 'label2'])
+```
+{: .language-python}
+Annotations: 
+```
+plt.annotate('text', xy=(x, y))
+```
+{: .language-python}
+
+## Subplots
+
+```
+fig, axs = plt.subplots(1, 2)
+axs[0, 0].plot(iris_df['sepal.length'], iris_df['sepal.width'])
+axs[0, 1].plot(iris_df['petal.length'], iris_df['pteal.width'])
+plt.show()
+```
+{: .language-python}
+
+## Saviing (for multiple plots)
+```
+plt.savefig('filename.png') #.pdf .svg
+```
+{: .language-python}
+
+As you have seen there are many different type of plots, if you need a specific kind of plot a good place to start is the super helpful cheat sheets on Matplotlib below. 
 
 
 [Plotting in Matplotlib cheat sheet](https://images.datacamp.com/image/upload/v1676360378/Marketing/Blog/Matplotlib_Cheat_Sheet.pdf)  
