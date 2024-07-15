@@ -3,7 +3,7 @@ layout: lesson
 root: .
 ---
 
-This contains all the day two content for the AI Summer School. We will complete our introduction to Python via the IDE Spyder. Day 2 focuses on cleaning and manipulating data. It is expected that your dataset may start to take you in a specific direction.
+This worksheet contains all the day two content for the AI Summer School. Day 2 focuses on cleaning, visualising, and manipulating data.
 
 **By the end of day two, we hope you will be confident to:**
 
