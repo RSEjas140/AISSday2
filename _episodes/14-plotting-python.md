@@ -44,7 +44,7 @@ plt.show()
 
 ## Plot Types
 
-* Line Plot: 
+Line Plot: 
 ```
 plt.figure()
 plt.plot(iris_df.index, iris_df['sepal.width'])
@@ -55,7 +55,7 @@ plt.show()
 ```
 {: .language-python}
 
-* Bar Plot: 
+Bar Plot: 
 ```
 #modify data for bar plot
 species_counts = iris_df['variety'].value_counts()
@@ -69,7 +69,7 @@ plt.show()
 ```
 {: .language-python}
 
-* Histogram: 
+Histogram: 
 ```
 plt.figure()
 plt.hist(iris_df['sepal.length'], bins=20)
