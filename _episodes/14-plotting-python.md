@@ -68,6 +68,7 @@ plt.ylabel('Count')
 plt.show()
 ```
 {: .language-python}
+
 * Histogram: 
 ```
 plt.figure()
