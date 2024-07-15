@@ -15,9 +15,9 @@ keypoints:
 - "A `DataFrame` is a two-dimensional array-like object"
 - "Data in a `Series` or `DataFrame` is labelled. The labels are are stored in an index"
 - "Data can be accesssed via its label using `loc`, or via its position using `iloc`"
-- Take a slice of data using a colon `:`
-- Use boolean indexing for more complicated conditions
-- Missing values are represented by `<NA>`
+- "Take a slice of data using a colon `:`"
+- "Use boolean indexing for more complicated conditions"
+- "Missing values are represented by `<NA>`"
 - "`DataFrame` indexing goes `[row, column]`"
 ---
 
@@ -29,11 +29,9 @@ First things first, let's import `pandas`.
 import pandas as pd
 ```
 
-This gives us access to all the useful code in the `pandas` library. That's about 1500 files and 400,000 lines of Python, plus some high-performance bits written in Cython and C - so we just saved ourselves a lot of work. 
-
 ## Data types in `pandas`
 
-On top of all the usual Python object types (like `str`, `int` and `float`), `pandas` has two main types of its own: `Series` and `DataFrame`. These are both containers for labelled data.
+On top of all the usual Python object types, `pandas` has two main types of its own: `Series` and `DataFrame`. These are both containers for labelled data.
 
 A `Series` is a 1-dimensional container, similar to a list, with some extra functionality. A `DataFrame` is essentially a collection of `Series`. You can think of a `DataFrame` as a table (like in Microsoft Excel or a SQL database), with `Series` for columns. 
 
@@ -47,7 +45,7 @@ A `Series` is a 1-dimensional container, similar to a list, with some extra func
 > - A `DataFrame` contains 2-dimensional, labelled data - like a matrix, or a table
 {: .callout}
 
-Most of the time you'll be probably interacting with `DataFrame`s. However, many of same principles apply to both `Series` and `DataFrame`s, and the concepts are easier to understand when we're just looking at a single dimension, so we'll learn a bit about `Series` to start with. 
+Most of the time you'll be probably interacting with `DataFrames`. However, many of same principles apply to both `Series` and `DataFrames`, and the concepts are easier to understand when we're just looking at a single dimension, so we'll learn a bit about `Series` to start with. 
 
 ## Key concepts for a `Series`
 
@@ -225,7 +223,7 @@ dtype: bool
 
 We're then passing this `Series` into `loc` and using it to tell pandas whether or not we want each value. 
 
-There are lots of operators and functions that can be used to return boolean values. Some common ones are 
+We can use all of the comparison operators we looked at in day one.
 
 - `<`: "less than"
 - `>`: "greater than"
@@ -244,132 +242,5 @@ evens.loc[(evens > 3) & (evens < 8)]
 2    4
 3    6
 dtype: int64
-```
-
-We'll go into this in more depth later.
-
-### A `Series` has a single data type
-
-Each of the `Series` has a data type. When we print a `Series`, the data type (`dtype`) is shown beneath the contents. `integers` and `evens` both have the dtype `int64`. This is simple enough, they both contains integers. However, `ordinals`, whose data elements are strings, shows `dtype: object`. Why is this? 
-
-The `object` type is like a generic catch-all. It was used before `pandas` was able to support strings, and it remains in situations like this because the developers didn't want to break things. There are some good reasons for telling `pandas` to treat our data as strings instead. We can specify the data type when we create the `Series`, like this:
-
-```python
-str_ordinals = pd.Series({1: 'first', 2: 'second', 3: 'third', 4: 'fourth'}, dtype="string")
-print(str_ordinals)
-```
-
-```output
-1     first
-2    second
-3     third
-4    fourth
-dtype: string
-```
-
-Or we can create a new `Series` from the old one, converting the type, like this:
-
-```python
-str_ordinals = ordinals.astype("string")
-```
-
-> `Series` are intended to store data of a single type. This means that in general, a `Series` should contain only, for example, text or numbers - not both. 
-> 
-> We can specify the data type of a `Series` when we create it.
-{: .callout}
-
-## `DataFrame`
-
-A `DataFrame` has rows and columns. Like a `Series`, it has labels, but both the rows and the columns have labels. Let's combine our `Series` into a single `DataFrame`:
-
-```python
-numbers = pd.DataFrame({'integers': integers, 'evens': evens, 'ordinals': str_ordinals})
-print(numbers)
-```
-
-```output
-   integers  evens ordinals
-0         0      0     <NA>
-1         1      2    first
-2         2      4   second
-3         3      6    third
-4         4      8   fourth
-```
-
-Each of our `Series` is now a column in `numbers`, and we used a dict to pass in column labels. Note that the data types are not printed. 
-
-The `Series` are merged on their index. Because the `Series` have a lot of index labels in common, this works pretty well for us. However, `ordinals` has only 4 values instead of 5, and it only starts at 1 - there's no common way of spelling "0th" ("zeroth"? "zeroeth"? "zeroast"?). This means that when the indexes are merged, the `ordinals` column has a missing value.
-
-> Missing values are represented as `<NA>`
-{: .callout}
-
-### Get rows from a `DataFrame` using `loc[row_label]`
-
-Now when we use the `loc` function with a single value, we get back a whole row:
-
-```python
-print(numbers.loc[1])
-```
-
-```output
-integers        1
-evens           2
-ordinals    first
-Name: 1, dtype: object
-```
-
-The output here is a `Series` containing all the data from the row at index value 1. The index labels for this new `Series` correspond to the column labels from the `DataFrame`. The row has a `dtype`, which is object, because we have a mix of strings and numbers. 
-
-If we pass a list of values, we'll get back a `DataFrame` containing multiple rows:
-
-```python
-numbers.loc[[1, 3]]
-```
-
-```output
-   integers  evens ordinals
-1         1      2    first
-3         3      6    third
-```
-
-If we take a slice of a `DataFrame` (using a colon `:` like before), we'll get back another DataFrame:
-
-```python
-df.loc[1:3]
-```
-
-```output
-   integers  evens ordinals
-1         1      2    first
-2         2      4   second
-3         3      6    third
-```
-
-In these examples we're specifying the row, and `pandas` assumes that we want every column. What if we don't?
-
-### Specify columns in a `DataFrame` using `loc[row_label, column_label]`
-
-If we want to access a single element in the `DataFrame`, we need to pass two labels to `loc`: one for the row, and one for the column. In our example `DataFrame` the rows are indexed with numbers, but the columns are indexed with strings, so we need to use, for example:
-
-```python
-numbers.loc[2, 'evens']
-```
-
-> The index order in a `DataFrame` is `[row, column]`
-{: .callout}
-
-What if we want to access a whole column? If you solved the challenge above, you'll remember that a slice with no endpoints returns the whole `Series`. We can use this like so:
-
-```python
-numbers.loc[:, 'integers']
-```
-
-```output
-0    0
-1    1
-2    2
-3    3
-4    4
-Name: integers, dtype: int64
 ```
 
