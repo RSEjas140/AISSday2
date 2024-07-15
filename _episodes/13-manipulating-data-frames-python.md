@@ -124,23 +124,16 @@ iris_df['petal.length.squared'] = iris_df['petal.length'].apply(square_value)
 
 ### Useful organisational tools
 
-* Display column names:
-```
-print(iris_df.columns)
-```
-{: .language-python}
-
-
 * Renaming columns:
 ```
-iris_df.rename(columns={'sepal.length': 'sepal_length'}
+iris_df.rename(columns={'sepal.length': 'sepal_length'})
 ```
 {: .language-python}
 
 
 * Setting index: 
 ```
-iris_df.set_index('sepal_length')
+iris_df.set_index('petal.length.squared')
 ```
 {: .language-python}
 
@@ -156,16 +149,23 @@ iris_df.sort_values(by='sepal_length')
 * Grouping:
 
 ```
-iris_df.groupby('variety')
+iris_df.groupby('variety').mean()
 ```
 {: .language-python}
+
+### Filtering
+```
+df = iris_df[iris_df['petal.legnth'] > 1.1] 
+```
+{: .language-python}
+
 
 ### Exporting data
 
 Manipulations, transformations, etc. can take time on big datasets. You won't want to repeat this everytime you want to work on your data. So good practice is to save the output as a new file. 
 
 ```
-iris_df.to_csv("proc_data\sensible_name.csv")
+iris_df.to_csv("p_data\sensible_name.csv")
 ```
 {: .language-python}
 

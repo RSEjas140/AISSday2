@@ -46,24 +46,41 @@ plt.show()
 
 * Line Plot: 
 ```
-plt.plot(x, y)
+plt.figure()
+plt.plot(iris_df.index, iris_df['sepal.width'])
+plt.xlabel('Item number')
+plt.ylabel('Sepal Width (cm)')
+plt.title('Sepal Widths')
+plt.show()
 ```
 {: .language-python}
-* Scatter Plot: plt.scatter(x, y)
-```
-plt.scatter(x, y)
-```
-{: .language-python}
+
 * Bar Plot: 
 ```
-plt.bar(categories, values)
+#modify data for bar plot
+species_counts = iris_df['variety'].value_counts()
+
+plt.figure()
+plt.bar(species_counts.index, species_counts.values)
+plt.title('Number of Samples for Each Iris Species')
+plt.xlabel('Species')
+plt.ylabel('Count')
+plt.show()
 ```
 {: .language-python}
 * Histogram: 
 ```
-plt.hist(data, bins)
+plt.figure()
+plt.hist(iris_df['sepal.length'], bins=20)
+plt.title('Histogram of Sepal Length')
+plt.xlabel('Sepal Length (cm)')
+plt.ylabel('Frequency')
+plt.show()
 ```
 {: .language-python}
+
+### Other plots
+
 * Box Plot: 
 ```
 plt.boxplot(data)
@@ -84,26 +101,34 @@ plt.imshow(data, cmap='hot', interpolation='nearest')
 
 Add legend: 
 ```
+plt.figure()
+plt.plot(iris_df.index, iris_df['sepal.width'], label = 'Width')
+plt.plot(iris_df.index, iris_df['sepal.length'],label = 'Length')
+plt.xlabel('Item number')
+plt.ylabel('Sepal Width and length (cm)')
+plt.title('Sepal Widths')
 plt.legend()
+plt.show()
 ```
 {: .language-python}
-Specify legend labels: 
-```
-plt.legend(['label1', 'label2'])
-```
-{: .language-python}
+
 Annotations: 
 ```
 plt.annotate('text', xy=(x, y))
 ```
 {: .language-python}
 
-## Subplots
+## Improving plots aesthetically
+
+Figures can be saved in .svg format and edited in graphic software like inkscape. Some minor changes to display options can improve the lok of a visualisation (depending on your taste). 
 
 ```
-fig, axs = plt.subplots(1, 2)
-axs[0, 0].plot(iris_df['sepal.length'], iris_df['sepal.width'])
-axs[0, 1].plot(iris_df['petal.length'], iris_df['pteal.width'])
+plt.figure(figsize=(10, 6)) #custom figure size
+plt.hist(iris_df['sepal.length'], bins=20, color='skyblue', edgecolor='black') # colour choices
+plt.title('Histogram of Sepal Length')
+plt.xlabel('Sepal Length (cm)')
+plt.ylabel('Frequency')
+plt.grid(True, linestyle='--', alpha=0.75) #alpha grid
 plt.show()
 ```
 {: .language-python}
