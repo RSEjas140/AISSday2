@@ -237,6 +237,6 @@ plt.grid(axis='y')
 plt.show()
 ```
 
-We have no expectation for what the distribution should look like but with your own dataset you may have an understanding. We could use the distrabution to identify outliers (e.g., if the values were above 150+, under 0, etc.)
+We have no expectation for what the distribution should look like but with your own dataset you may have an understanding. We could use range to to identify outliers (e.g., if the values were above 150+, under 0, etc.)
 
 [^1]: [Cleaning Big Data: Most Time-Consuming, Least Enjoyable Data Science Task, Survey Says. Forbes, 2016](https://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-most-time-consuming-least-enjoyable-data-science-task-survey-says/)
