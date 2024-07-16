@@ -47,7 +47,6 @@ So what are we dealing with here? Hopefully you had a browse of the data already
 ```python
 survey_data.head(2)
 survey_data.info()
-survey_data.describe()
 ```
 
 ```output
@@ -197,16 +196,47 @@ survey_data["Additional monetary compensation"] = survey_data.loc[:, "Additional
 {: .callout}
 
 
+### Visualise distribution
 
+We can explore the distribution of ages. In this data set they are stored as age ranges. We want to get the number of occurances for a given age bracket.
 
+```python
+age_range_counts = survey_data['How old are you?'].value_counts()
+print(age_range_counts)
+```
 
+```output
+How old are you?
+35-44         7040
+25-34         5988
+45-54         2755
+55-64          917
+18-24          356
+65 or over     104
+under 18         4
+Name: count, dtype: int64
+```
 
-- [x] find and count NaNs
-- [x] create new columns - sum income, convert currency
-- [x] value_counts() to look at categorial statistics
-- [ ] summary statistics using describe
-- [ ] find range and outliers
-- [ ] find distributions for each category - groupby("years of experience").mean()
+As a standard they are ordered by occurance. To display we would rather order by age.
 
+```python
+custom_order = ['under 18', '18-24', '25-34', '35-44', '45-54', '55-64', '65 or over']
+
+age_range_counts_custom_order = age_range_counts.reindex(custom_order)
+```
+
+Now lets visualise the distribution
+
+```python
+plt.figure(figsize=(10, 6))
+age_range_counts_custom_order.plot(kind='bar', edgecolor='black')
+plt.title('Count of Each Age Range')
+plt.xlabel('Age Range')
+plt.ylabel('Count')
+plt.grid(axis='y')
+plt.show()
+```
+
+We have no expectation for what the distribution should look like but with your own dataset you may have an understanding. We could use the distrabution to identify outliers (e.g., if the values were above 150+, under 0, etc.)
 
 [^1]: [Cleaning Big Data: Most Time-Consuming, Least Enjoyable Data Science Task, Survey Says. Forbes, 2016](https://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-most-time-consuming-least-enjoyable-data-science-task-survey-says/)
