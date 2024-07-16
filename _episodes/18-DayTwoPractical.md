@@ -1,46 +1,46 @@
 ---
 title: "Practical session Day 2"
 teaching: 10
-exercises: 20
+exercises: 50
 questions:
-- "Can you now get your own data into Python?"
+- "Can you start to clean your dataset?"
 objectives:
-- "Make a plan for how to get your data into Python. Consider data type, storage, and method"
-- "If you don't have a dataset talk to a demonstrator about finding one"
-- "Create a new project structure that suits your task"
-- "Execute your plan in code"
+- "Visualise your data to understand its distribution"
+- "Identify issues (e.g., missing values, duplicates, outliers, etc.)"
+- "Consider what can you do about your missing values"
+- "Determine what you aim to achieve with the cleaning process (e.g., improve accuracy, consistency, completeness)."
+- "Can you validate aspects of your data?"
 keypoints:
-- "Planning and solving problems with Python will improve your skills and confidence."
-- "The first step to achieving good-quality analysis is solid project management and getting your data into a sensible format and structure."
+- "The reliability of your analysis relies on the cleanliness of your data"
 ---
-### Set up a new project.
-Create a new project and a new script. Add a data folder to the project and place your dataset in this folder. Set the data folder to read-only.
+### Continue using the project you set up to get your data into Python.
+Add a processed data folder to the project if you need one.
 
-### Consider the type of data in your dataset.
+### Cleaning Techniques.
 
 Understanding the data types in your dataset is crucial for effective processing and analysis.
 
 Consider:
 
-1. What kind of data am I dealing with?
-2. What types are in my data?
-3. Have I seen an example that relates to my data?
-4. What libraries will I need?
-5. What am I unsure about with my dataset?
+1. Data Imputation: Decide on methods for filling in missing values (e.g., mean imputation, interpolation).
+2. Normalization/Standardization: Apply techniques to normalize or standardize data values for consistency.
+3. Data Transformation: Perform necessary transformations (e.g., converting data types, aggregating data).
+4. Error Correction: Implement methods to correct detected errors.
 
-### What import method will I use?
 
-The method of importing data into Python depends on the data format and source. You may have a very common file type (e.g., CSV Files) or something much more unusual that may need an approach we have not covered.
+### Document the process
 
-### How am I going to store my data in Python?
+Keep a record of what you have done so when you come back to it you can easily appricate what you did to change your data.
 
-Choosing the appropriate data structure for handling your dataset can greatly influence your workflow.
+### Sanity tests.
 
-1. What functionality do I need?
-2. How does my data type influence the way I store it?
-3. How will it affect run-time?
+When you have applied some cleaning, how are you going to test that it has been done correctly?
 
-### Tips for when you start writting code
+### Save your new cleaned dataset
+
+Keep it as a seperate file and do not write over the original.
+
+### Tips for when you start writting code to clean your data
 
 1. Start by writing notes (#) detailing your workflow.
 2. Don’t try to write everything in one go. Write and verify as you go.
@@ -58,8 +58,8 @@ Consider the material we have covered today:
 
 ### Stretch Tasks (if you finish before the allotted time)
 
-1. Try visualising interesting aspects of your dataset.
-2. Collate statistics about your dataset. 
+1. Consider what machine learning methods you want to use on your dataset.
+2. Spend some time finalising the problem you are trying to solve in your dataset.
 
 
 
