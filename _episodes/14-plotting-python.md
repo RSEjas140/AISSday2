@@ -44,6 +44,8 @@ plt.show()
 
 ## Plot Types
 
+Let's look at some common plots.
+
 Line Plot: 
 ```
 plt.figure()
@@ -134,13 +136,19 @@ plt.show()
 ```
 {: .language-python}
 
-## Saviing (for multiple plots)
+## Saving (for multiple plots)
+
+You can save directly from the pop-up but if you wanted to run 100's of plots, not show them, just save them. This is the syntax you would need.
+
 ```
 plt.savefig('filename.png') #.pdf .svg
 ```
 {: .language-python}
 
-As you have seen there are many different type of plots, if you need a specific kind of plot a good place to start is the super helpful cheat sheets on Matplotlib below. 
+
+### Resources
+
+As you have seen, there are many different type of plots. If you need a specific plot, a good place to start is the super helpful cheat sheets on Matplotlib. Links below. 
 
 
 [Plotting in Matplotlib cheat sheet](https://images.datacamp.com/image/upload/v1676360378/Marketing/Blog/Matplotlib_Cheat_Sheet.pdf)  

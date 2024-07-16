@@ -1,7 +1,7 @@
 ---
-title: "Practical session"
+title: "Practical session Day 2"
 teaching: 10
-exercises: 45
+exercises: 20
 questions:
 - "Can you now get your own data into Python?"
 objectives:

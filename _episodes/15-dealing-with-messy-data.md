@@ -16,7 +16,7 @@ keypoints:
 
 {% include links.md %}
 
-We've covered the basic concepts of storing and accessing data in Pandas, on a nice neat dataset. But real-world datasets are often - usually - nearly always? - quite messy; so much so that data scientists spend the majority of their time organising and cleaning data [^1]. We'll download a dataset and spend some time exploring it, tidying it up, and analysing it, learning some more `pandas` functions along the way. 
+We've covered the basic concepts of storing and accessing data in Pandas, on a nice neat dataset. But real-world datasets are often quite messy; so much so that data scientists spend the majority of their time organising and cleaning data [^1]. We'll download a dataset and spend some time exploring it, tidying it up, and analysing it, utilising some more `pandas` functions along the way. 
 
 ## Download a data set
 
@@ -24,28 +24,20 @@ The website [askamanager.org](https://www.askamanager.org/) runs an annual surve
 
 Have a look at the 2023 survey [here](https://www.askamanager.org/2023/04/how-much-money-do-you-make-6.html). Scroll through the questions. Try filling in answers, and notice the validation (restrictions on what answers you can give). 
 
-The results are available as a Google Sheet [here](https://docs.google.com/spreadsheets/d/1ioUjhnz6ywSpEbARI-G3RoPyO0NRBqrJnWf-7C_eirs/edit?resourcekey=&gid=1854892322#gid=1854892322). Browse the data. What do you notice? Try to familiarise yourself with some of the basic features. What data types does it contain? Can you anticipate any problems we might have with it? 
+The results are available as a Google Sheet [here](https://docs.google.com/spreadsheets/d/1ioUjhnz6ywSpEbARI-G3RoPyO0NRBqrJnWf-7C_eirs/edit?resourcekey=&gid=1854892322#gid=1854892322). Browse the data. 
 
-Download a copy to work on by clicking File > Download > Comma-separated values (.csv). Move the file to your data directory, and give it an easy-to-use name - I'll call it `salary_survey_2023.csv`. 
+* What do you notice? 
+* What data types does it contain? 
+* Can you anticipate any problems we might have with it? 
+
+Download a copy to work on by clicking File > Download > Comma-separated values (.csv). Move the file to your data directory, and give it an easy-to-use name `salary_survey_2023.csv`. 
 
 ## Read the dataset into `pandas`
 
-Let's read in the survey data. If you're starting a new session, remember to import `pandas` first. My data is stored in a directory called data, and it's a level above where I'm writing my code:
-
-```
-.
-├── code
-│   ├── (this is my working directory)
-│   └── ...
-├── data
-│   ├── salary_survey_2023.csv
-│   └── ...
-```
-
-So the command is:
+Let's read in the survey data. If you're starting a new session, remember to import `pandas` first. My data is stored in a directory called data:
 
 ```python
-survey_data = pd.read_csv("../data/salary_survey_2023.csv")
+survey_data = pd.read_csv("data/salary_survey_2023.csv")
 ```
 
 ## Get the dimensions of a DataFrame with DataFrame.shape
@@ -53,26 +45,9 @@ survey_data = pd.read_csv("../data/salary_survey_2023.csv")
 So what are we dealing with here? Hopefully you had a browse of the data already. Let's check how many rows and columns we have:
 
 ```python
-survey_data.shape
-```
-
-```output
-(17164, 20)
-```
-
-> ## DataFrame.shape is a property
->
-> Like `DataFrame.columns`, `shape` is a property, not a method - it doesn't have brackets, and it doesn't "do" anything, it just contains information that we can read
-{: .callout}
-
-This tells us that we have 17,164 rows (the responses) and 20 columns (the questions). 
-
-## View the first few rows with DataFrame.head()
-
-We can print the first few rows using `head()` function:
-
-```python
 survey_data.head(2)
+survey_data.info()
+survey_data.describe()
 ```
 
 ```output
@@ -113,19 +88,6 @@ survey_data.head(2)
 1  White 
 ```
 
-> ## DataFrame.head() is a function
-> 
-> `head()` is a function, not a property. We write it with brackets, that can contain parameters, allowing us to control its behaviour. 
-{: .callout}
-
-## Get human-readable information with DataFrame.info()
-
-Let's get some more detailed, human-readable information about the data set.
-
-```python
-survey_data.info()
-```
-
 ```output
 <class 'pandas.core.frame.DataFrame'>
 RangeIndex: 17164 entries, 0 to 17163
@@ -162,7 +124,7 @@ Most of the columns have dtype `object`.  Notice that there two are columns with
 
 Let's try to find which values in that column are not integers. 
 
-We could try to check the type of each element directly, but this won't work, because Pandas has created the whole column as float64. Instead we have to look at the values and find those which aren't whole numbers. The "modulo" operator (`%`) returns the remainder of a division - for example, `10 % 3 == 1`.
+We could try to check the type of each element directly, but this won't work, because Pandas has created the whole column as float64. Instead we have to look at the values and find those which aren't whole numbers. The "modulo" operator (`%`) returns the remainder of a division - Reminder: `10 % 3 == 1`.
 
 If we use 1 as the denominator, we'll get the decimal portion of a real number. 
 
@@ -197,11 +159,13 @@ Shape: (4017,)
 Name: Additional monetary compensation, Length: 4017, dtype: float64
 ```
 
-We can see that instead of decimal numbers, we're dealing with `NaN` ("not a number"), which is what Pandas uses to represent a missing number. What's happened here? 
+We can see that instead of decimal numbers, we're dealing with `NaN` ("not a number"), which is what Pandas uses to represent a missing number. 
+
+### What's happened here? 
 
 When people fill in the survey, if they have no additional monetary compensation they might mark in 0, or they leave it blank. The survey has no default value, so the blank answers produce empty cells in the CSV file. When Pandas reads in those elements it fills them in with `NaN` - it doesn't know that in our case, it's safe to assume that a missing value should be represented with a 0. And although `NaN` is explicitly not a number, its data type is `np.float64` (a floating point number), so the whole series is "cast" as `np.float64`. 
 
-## USe DataFrame.fillna() to replace missing values
+## Use DataFrame.fillna() to replace missing values
 
 Knowing what we know about the logic here, we can safely replace all the `NaN` values with zeroes. The neatest way to do this is with the built-in Pandas function, `DataFrame.fillna()`. This function has lots of useful options - you can read about it in the docs pages [here](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.fillna.html). 
 
@@ -227,7 +191,7 @@ Once we've replaced the missing values we can tell Pandas to treat the column as
 survey_data["Additional monetary compensation"] = survey_data.loc[:, "Additional monetary compensation"].astype(int)
 ```
 
-> ## Using [] to access a column
+> ## Using \[ \] to access a column
 > 
 > Note that we've directly accessed the column by its name here, using just square brackets - similarly to how we apply a mask. It's best to use `loc` to *read* columns, but this is the easiest way to "set" the values in a single column.
 {: .callout}
@@ -273,7 +237,7 @@ The corresponding survey question had a limited selection, which is reflected in
 We want to convert all the figures into the same currency so we can compare and calculate some meaningful statistics. The UK Government publishes average annual GBP exchange rates on [its website](https://www.trade-tariff.service.gov.uk/exchange_rates/average). Download a CSV for 2023 [here](https://www.trade-tariff.service.gov.uk/api/v2/exchange_rates/files/average_csv_2023-12.csv). Put the new file in your data directory and load it into a new dataframe:
 
 ```python
-exchange_rates = pd.read_csv("../data/average_csv_2023-12.csv")
+exchange_rates = pd.read_csv("data/average_csv_2023-12.csv")
 ```
 
 ```output
